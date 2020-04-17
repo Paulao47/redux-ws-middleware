@@ -1,23 +1,17 @@
 import { connectSocket, socketMessage, socketError } from './actions';
 
 // Default Middleware Functions
-const onOpen = event => {
-  console.log('Websocket opened.', event);
-};
+const onOpen = () => {};
 
 const onMessage = (event, socket, store) => {
-  console.log('Websocket received message:', event);
   store.dispatch(socketMessage(event));
 };
 
 const onError = (error, socket, store) => {
-  console.log('Websocket error:', error);
   store.dispatch(socketError(error));
 };
 
-const onClose = event => {
-  console.log('Websocket closed.', event);
-};
+const onClose = () => {};
 
 const onMiddlewareConnect = action => {
   const data = action.event;
