@@ -3,14 +3,10 @@
   "version": "0.0.1",
   "description": "Redux Websocket Middleware",
   "main": "./dist/index.js",
-  "author": {
-    "name": "Paula Oreskovic",
-    "email": "paula.oreskovic47@gmail.com",
-    "url": "https://github.com/paulao47"
-  },
+  "author": "Paula Oreskovic <paula.oreskovic47@gmail.com> (https://github.com/paulao47)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Paulao47/redux-ws-middleware"
+    "url": "git+https://github.com/Paulao47/redux-ws-middleware.git"
   },
   "license": "MIT",
   "scripts": {
@@ -56,7 +52,6 @@
     "webpack-dev-server": "^3.7.2"
   },
   "peerDependencies": {
-    "bootstrap": ">= 4.0.0",
     "react": ">= 16.13.1",
     "react-dom": ">= 16.13.1",
     "redux": ">= 4.0.5"
@@ -69,5 +64,17 @@
   },
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/Paulao47/redux-ws-middleware/issues"
+  },
+  "homepage": "https://github.com/Paulao47/redux-ws-middleware#readme",
+  "directories": {
+    "example": "examples"
+  },
+  "keywords": [
+    "redux",
+    "websocket",
+    "middleware"
+  ]
 }
