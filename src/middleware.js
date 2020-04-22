@@ -1,43 +1,43 @@
 import { connectSocket, socketMessage, socketError } from './actions';
 
 // Default Middleware Functions
-const onOpen = () => {};
+const onOpenEvent = () => {};
 
-const onMessage = (event, socket, store) => {
+const onMessageEvent = (event, socket, store) => {
   store.dispatch(socketMessage(event));
 };
 
-const onError = (error, socket, store) => {
+const onErrorEvent = (error, socket, store) => {
   store.dispatch(socketError(error));
 };
 
-const onClose = () => {};
+const onCloseEvent = () => {};
 
-const onMiddlewareConnect = action => {
-  const data = action.event;
+const onMiddlewareConnectEvent = action => {
+  const data = action.event || {};
   const timestamp = new Date().getTime();
 
   action.event = { data, timestamp, type: 'CONNECT' };
 };
 
-const onMiddlewareMessage = action => {
-  const data = action.message.data;
+const onMiddlewareMessageEvent = action => {
+  const data = action.message.data || {};
   const timestamp = new Date().getTime();
 
   action.message = { data, timestamp, type: 'MESSAGE' };
 };
 
-const onMiddlewareError = action => {
-  const data = action.error;
+const onMiddlewareErrorEvent = action => {
+  const data = action.error || {};
   const timestamp = new Date().getTime();
 
   action.error = { data, timestamp, type: 'ERROR' };
 };
 
-const onMiddlewareClose = (action, socket) => {
+const onMiddlewareCloseEvent = (action, socket) => {
   socket.close();
 
-  const data = action.event;
+  const data = action.event || {};
   const timestamp = new Date().getTime();
 
   action.event = { data, timestamp, type: 'DISCONNECT' };
@@ -48,14 +48,14 @@ const middlewareConfig = {
   config: {
     url: '',
     protocols: [],
-    onOpen: onOpen,
-    onMessage: onMessage,
-    onError: onError,
-    onClose: onClose,
-    onMiddlewareConnect: onMiddlewareConnect,
-    onMiddlewareMessage: onMiddlewareMessage,
-    onMiddlewareError: onMiddlewareError,
-    onMiddlewareClose: onMiddlewareClose,
+    onOpen: onOpenEvent,
+    onMessage: onMessageEvent,
+    onError: onErrorEvent,
+    onClose: onCloseEvent,
+    onMiddlewareConnect: onMiddlewareConnectEvent,
+    onMiddlewareMessage: onMiddlewareMessageEvent,
+    onMiddlewareError: onMiddlewareErrorEvent,
+    onMiddlewareClose: onMiddlewareCloseEvent,
     reconnect: false,
     reconnectInterval: 0
   }

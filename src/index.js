@@ -1,11 +1,13 @@
 import websocketMiddleware, { configureWebsocket } from './middleware';
-import { connectSocket, closeSocket } from './actions';
-import websocketEventsReducer from './reducers';
+import { connectSocket, closeSocket, createAction } from './actions';
+import { websocketEventsReducer, createReducer } from './reducers';
 
 export {
   websocketMiddleware,
   websocketEventsReducer,
   configureWebsocket,
   connectSocket,
-  closeSocket
+  closeSocket,
+  createAction,
+  createReducer
 };

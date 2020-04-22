@@ -3,30 +3,43 @@ const WebsocketReducerDefaultState = {
   events: []
 };
 
-export default (state = WebsocketReducerDefaultState, action) => {
-  switch (action.type) {
-    case 'WEBSOCKET_CONNECT': {
+export const createReducer = (initialState, handlers) => {
+  return (state = initialState, action) => {
+    if (handlers.hasOwnProperty(action.type)) {
+      return handlers[action.type](state, action);
+    } else {
+      return state;
+    }
+  };
+};
+
+const WEBSOCKET_CONNECT = 'WEBSOCKET_CONNECT';
+const WEBSOCKET_MESSAGE = 'WEBSOCKET_MESSAGE';
+const WEBSOCKET_ERROR = 'WEBSOCKET_ERROR';
+const WEBSOCKET_DISCONNECT = 'WEBSOCKET_DISCONNECT';
+
+export const websocketEventsReducer = createReducer(
+  WebsocketReducerDefaultState,
+  {
+    [WEBSOCKET_CONNECT]: (state, action) => {
       return {
         events: [action.event, ...state.events]
       };
-    }
-    case 'WEBSOCKET_MESSAGE': {
+    },
+    [WEBSOCKET_MESSAGE]: (state, action) => {
       return {
         events: [action.message, ...state.events]
       };
-    }
-    case 'WEBSOCKET_ERROR': {
+    },
+    [WEBSOCKET_ERROR]: (state, action) => {
       return {
         events: [action.error, ...state.events]
       };
-    }
-    case 'WEBSOCKET_DISCONNECT': {
+    },
+    [WEBSOCKET_DISCONNECT]: (state, action) => {
       return {
         events: [action.event, ...state.events]
       };
     }
-    default: {
-      return state;
-    }
   }
-};
+);
