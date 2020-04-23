@@ -20,7 +20,8 @@
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "no-console": "off",
     "no-unused-vars": "warn",
-    "semi": [2, "always"]
+    "semi": [2, "always"],
+    "no-prototype-builtins": "off"
   },
   "settings": {
     "react": {
