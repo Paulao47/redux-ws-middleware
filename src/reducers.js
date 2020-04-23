@@ -15,6 +15,7 @@ export const createReducer = (initialState, handlers) => {
 
 const WEBSOCKET_CONNECT = 'WEBSOCKET_CONNECT';
 const WEBSOCKET_MESSAGE = 'WEBSOCKET_MESSAGE';
+const WEBSOCKET_SEND = 'WEBSOCKET_SEND';
 const WEBSOCKET_ERROR = 'WEBSOCKET_ERROR';
 const WEBSOCKET_DISCONNECT = 'WEBSOCKET_DISCONNECT';
 
@@ -27,6 +28,11 @@ export const websocketEventsReducer = createReducer(
       };
     },
     [WEBSOCKET_MESSAGE]: (state, action) => {
+      return {
+        events: [action.message, ...state.events]
+      };
+    },
+    [WEBSOCKET_SEND]: (state, action) => {
       return {
         events: [action.message, ...state.events]
       };

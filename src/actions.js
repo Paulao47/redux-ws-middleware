@@ -11,5 +11,6 @@ export const createAction = (type, ...argNames) => {
 
 export const connectSocket = createAction('WEBSOCKET_CONNECT', 'event');
 export const socketMessage = createAction('WEBSOCKET_MESSAGE', 'message');
+export const sendMessage = createAction('WEBSOCKET_SEND', 'message');
 export const socketError = createAction('WEBSOCKET_ERROR', 'error');
 export const closeSocket = createAction('WEBSOCKET_DISCONNECT', 'event');

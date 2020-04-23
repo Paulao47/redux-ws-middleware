@@ -27,6 +27,17 @@ const onMiddlewareMessageEvent = action => {
   action.message = { data, timestamp, type: 'MESSAGE' };
 };
 
+const onMessageSendEvent = (action, socket) => {
+  const message = action.message || '';
+  const timestamp = new Date().getTime();
+
+  const msg = { Message: message };
+
+  action.message = { data: message, timestamp, type: 'SEND' };
+
+  socket.send(JSON.stringify(msg));
+};
+
 const onMiddlewareErrorEvent = action => {
   const data = action.error || {};
   const timestamp = new Date().getTime();
@@ -54,6 +65,7 @@ const middlewareConfig = {
     onClose: onCloseEvent,
     onMiddlewareConnect: onMiddlewareConnectEvent,
     onMiddlewareMessage: onMiddlewareMessageEvent,
+    onMessageSend: onMessageSendEvent,
     onMiddlewareError: onMiddlewareErrorEvent,
     onMiddlewareClose: onMiddlewareCloseEvent,
     reconnect: false,
@@ -83,6 +95,7 @@ const websocketMiddleware = () => {
       onClose,
       onMiddlewareConnect,
       onMiddlewareMessage,
+      onMessageSend,
       onMiddlewareError,
       onMiddlewareClose,
       reconnect,
@@ -124,6 +137,11 @@ const websocketMiddleware = () => {
       }
       case 'WEBSOCKET_MESSAGE': {
         onMiddlewareMessage(action, socket, store);
+
+        return next(action);
+      }
+      case 'WEBSOCKET_SEND': {
+        onMessageSend(action, socket, store);
 
         return next(action);
       }

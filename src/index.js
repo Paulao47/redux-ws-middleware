@@ -1,5 +1,10 @@
 import websocketMiddleware, { configureWebsocket } from './middleware';
-import { connectSocket, closeSocket, createAction } from './actions';
+import {
+  connectSocket,
+  closeSocket,
+  sendMessage,
+  createAction
+} from './actions';
 import { websocketEventsReducer, createReducer } from './reducers';
 
 export {
@@ -8,6 +13,7 @@ export {
   configureWebsocket,
   connectSocket,
   closeSocket,
+  sendMessage,
   createAction,
   createReducer
 };
