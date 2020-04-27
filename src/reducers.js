@@ -1,6 +1,9 @@
+import { middlewareConfig } from './middleware';
+const { keyName, limit } = middlewareConfig.config;
+
 // Websocket reducer
 const WebsocketReducerDefaultState = {
-  events: []
+  [keyName]: []
 };
 
 export const createReducer = (initialState, handlers) => {
@@ -23,28 +26,53 @@ export const websocketEventsReducer = createReducer(
   WebsocketReducerDefaultState,
   {
     [WEBSOCKET_CONNECT]: (state, action) => {
+      const { event } = action;
+      const stateValue = state[keyName];
+      const newValue =
+        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
       return {
-        events: [action.event, ...state.events]
+        [keyName]: [event, ...newValue]
       };
     },
     [WEBSOCKET_MESSAGE]: (state, action) => {
+      const { message } = action;
+      const stateValue = state[keyName];
+      const newValue =
+        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
       return {
-        events: [action.message, ...state.events]
+        [keyName]: [message, ...newValue]
       };
     },
     [WEBSOCKET_SEND]: (state, action) => {
+      const { message } = action;
+      const stateValue = state[keyName];
+      const newValue =
+        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
       return {
-        events: [action.message, ...state.events]
+        [keyName]: [message, ...newValue]
       };
     },
     [WEBSOCKET_ERROR]: (state, action) => {
+      const { error } = action;
+      const stateValue = state[keyName];
+      const newValue =
+        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
       return {
-        events: [action.error, ...state.events]
+        [keyName]: [error, ...newValue]
       };
     },
     [WEBSOCKET_DISCONNECT]: (state, action) => {
+      const { event } = action;
+      const stateValue = state[keyName];
+      const newValue =
+        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
       return {
-        events: [action.event, ...state.events]
+        [keyName]: [event, ...newValue]
       };
     }
   }

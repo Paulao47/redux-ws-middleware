@@ -15,7 +15,7 @@ import 'bootstrap/scss/bootstrap.scss';
 import {
   websocketMiddleware,
   websocketEventsReducer,
-  configureWebsocket,
+  initMiddleware,
   connectSocket,
   closeSocket
 } from '../src/index';
@@ -48,7 +48,7 @@ class App extends Component {
   handleConnect() {
     const { url } = this.state;
 
-    configureWebsocket({ url });
+    initMiddleware({ url });
     store.dispatch(connectSocket());
   }
 

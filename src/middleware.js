@@ -55,7 +55,7 @@ const onMiddlewareCloseEvent = (action, socket) => {
 };
 
 // Default Middleware Config
-const middlewareConfig = {
+export const middlewareConfig = {
   config: {
     url: '',
     protocols: [],
@@ -69,11 +69,13 @@ const middlewareConfig = {
     onMiddlewareError: onMiddlewareErrorEvent,
     onMiddlewareClose: onMiddlewareCloseEvent,
     reconnect: false,
-    reconnectInterval: 0
+    reconnectInterval: 0,
+    limit: null,
+    keyName: 'events'
   }
 };
 
-export const configureWebsocket = config => {
+export const initMiddleware = config => {
   const initialConfig = middlewareConfig.config;
 
   middlewareConfig.config = { ...initialConfig, ...config };

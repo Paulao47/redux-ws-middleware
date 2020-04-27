@@ -1,4 +1,4 @@
-import websocketMiddleware, { configureWebsocket } from './middleware';
+import websocketMiddleware, { initMiddleware } from './middleware';
 import {
   connectSocket,
   closeSocket,
@@ -10,7 +10,7 @@ import { websocketEventsReducer, createReducer } from './reducers';
 export {
   websocketMiddleware,
   websocketEventsReducer,
-  configureWebsocket,
+  initMiddleware,
   connectSocket,
   closeSocket,
   sendMessage,
