@@ -1,6 +1,6 @@
 {
   "name": "redux-ws-middleware",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Redux Websocket Middleware",
   "main": "./dist/index.js",
   "author": "Paula Oreskovic <paula.oreskovic47@gmail.com> (https://github.com/paulao47)",
