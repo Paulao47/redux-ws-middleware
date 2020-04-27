@@ -6,23 +6,17 @@ A WebSocket middleware for [Redux](https://redux.js.org/).
 npm install redux-ws-middleware 
 ```
 ## Configuration
-First, configure your Redux store to use the middleware with `applyMiddleware`.
-
-```js
-import { createStore, applyMiddleware } from 'redux';
-import { websocketMiddleware, configureWebsocket } from 'redux-ws-middleware';
-import reducer from './reducer';
-
-const store = createStore(reducer, applyMiddleware(websocketMiddleware));
-```
-
-Then, customize the websocketMiddleware by passing options into `configureWebsocket`.
+First, initialize the websocketMiddleware by passing options into `initMiddleware`.
 
 ```js
 
-configureWebsocket(options);
+import { initMiddleware } from 'redux-ws-middleware';
+import options from './middlewareOptions';
+
+initMiddleware(options);
 
 ```
+
 #### Available options
 ```js
 interface MiddlewareConfig {
@@ -38,14 +32,33 @@ interface MiddlewareConfig {
     // Functions for middleware actions.
     onMiddlewareConnect?: (action: Object, socket: WebSocket, store) => void,
     onMiddlewareMessage?: (action: Object, socket: WebSocket, store) => void,
+    onMessageSend: (action: Object, socket: WebSocket, store) => void,
     onMiddlewareError?: (action: Object, socket: WebSocket, store) => void,
     onMiddlewareClose?: (action: Object, socket: WebSocket, store) => void,
     // Whether or not to reconnect when a WebSocket connection closes. False by default.
     reconnect?: boolean,
     // Ammount, in milliseconds, before attempting to reconnect.
-    reconnectInterval?: number    
+    reconnectInterval?: number,
+    // How many events to save in the Redux state. Unlimited (null) by default.
+    limit?: number,
+    // Name of the key in Redux state. Called 'events' by default.
+    keyName?: string
 }
 ```
+
+Then, configure your Redux store to use the middleware with `applyMiddleware`.
+
+```js
+import { createStore, applyMiddleware } from 'redux';
+import { websocketMiddleware, initMiddleware } from 'redux-ws-middleware';
+import options from './middlewareOptions';
+import reducer from './reducer';
+
+initMiddleware(options);
+
+const store = createStore(reducer, applyMiddleware(websocketMiddleware));
+```
+
 ## Usage
 You can dispatch these actions:
 
@@ -68,7 +81,18 @@ By default, dispatches when the WebSocket receives a message.
 ``` js
 {
     type: 'WEBSOCKET_MESSAGE',
-    event: {},
+    message: {},
+}
+```
+---
+
+##### WEBSOCKET_SEND
+By default, dispatches when you send a message to the WebSocket.
+###### Structure
+``` js
+{
+    type: 'WEBSOCKET_SEND',
+    message: {},
 }
 ```
 ---
