@@ -1,6 +1,6 @@
 import path from 'path';
 import webpack from 'webpack'; //eslint-disable-line
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 export default () => ({
   mode: 'production',
@@ -53,6 +53,8 @@ export default () => ({
 
   plugins: [
     // Clean dist folder
-    new CleanWebpackPlugin(['./dist/build.js'])
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['./dist/build.js']
+    })
   ]
 });

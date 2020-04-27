@@ -1,5 +1,5 @@
 import path from 'path';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 const packageJson = require('./package.json');
 
 export default () => ({
@@ -47,7 +47,13 @@ export default () => ({
     reactDOM: 'react-dom'
   },
 
-  plugins: [new CleanWebpackPlugin(['dist/*.*'])],
+  plugins: [
+    // Clean dist folder
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['dist/*.*']
+    })
+  ],
+
   optimization: {
     splitChunks: {
       name: 'vendor',
