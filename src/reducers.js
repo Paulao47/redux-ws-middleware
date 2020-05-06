@@ -27,53 +27,73 @@ export const websocketEventsReducer = createReducer(
   {
     [WEBSOCKET_CONNECT]: (state, action) => {
       const { event } = action;
-      const stateValue = state[keyName];
-      const newValue =
-        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
 
-      return {
-        [keyName]: [event, ...newValue]
-      };
+      if (event) {
+        const stateValue = state[keyName];
+        const newValue =
+          limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
+        return {
+          [keyName]: [event, ...newValue]
+        };
+      }
+      return { ...state };
     },
     [WEBSOCKET_MESSAGE]: (state, action) => {
       const { message } = action;
-      const stateValue = state[keyName];
-      const newValue =
-        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
 
-      return {
-        [keyName]: [message, ...newValue]
-      };
+      if (message) {
+        const stateValue = state[keyName];
+        const newValue =
+          limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
+        return {
+          [keyName]: [message, ...newValue]
+        };
+      }
+      return { ...state };
     },
     [WEBSOCKET_SEND]: (state, action) => {
       const { message } = action;
-      const stateValue = state[keyName];
-      const newValue =
-        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
 
-      return {
-        [keyName]: [message, ...newValue]
-      };
+      if (message) {
+        const stateValue = state[keyName];
+        const newValue =
+          limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
+        return {
+          [keyName]: [message, ...newValue]
+        };
+      }
+      return { ...state };
     },
     [WEBSOCKET_ERROR]: (state, action) => {
       const { error } = action;
-      const stateValue = state[keyName];
-      const newValue =
-        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
 
-      return {
-        [keyName]: [error, ...newValue]
-      };
+      if (error) {
+        const stateValue = state[keyName];
+        const newValue =
+          limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
+        return {
+          [keyName]: [error, ...newValue]
+        };
+      }
+      return { ...state };
     },
     [WEBSOCKET_DISCONNECT]: (state, action) => {
       const { event } = action;
-      const stateValue = state[keyName];
-      const newValue =
-        limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
 
-      return {
-        [keyName]: [event, ...newValue]
-      };
+      if (event) {
+        const stateValue = state[keyName];
+        const newValue =
+          limit || limit === 0 ? stateValue.slice(0, limit) : stateValue;
+
+        return {
+          [keyName]: [event, ...newValue]
+        };
+      }
+      return { ...state };
     }
   }
 );
